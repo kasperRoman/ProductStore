@@ -1,0 +1,22 @@
+﻿@model ProductStore.Models.Product
+
+@{
+    ViewData["Title"] = @Model.Name;
+}
+
+<h2>@Model.Name</h2>
+
+<div class="card p-4 shadow-sm">
+    <p><strong>Ціна:</strong> @Model.Price грн</p>
+    <p><strong>Категорія:</strong> @Model.Category</p>
+    <p><strong>В наявності:</strong> @Model.Stock шт</p>
+
+    <form asp-controller="Store" asp-action="AddToCart" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-success mt-3">Додати в кошик</button>
+    </form>
+
+    <a asp-controller="Store" asp-action="Index" class="btn btn-secondary mt-3">
+        Назад до каталогу
+    </a>
+</div>

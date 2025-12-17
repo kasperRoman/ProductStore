@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using ProductStore.Data;
 using ProductStore.Models;
 
-namespace ProductStore.Controllers
+namespace ProductStore.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
@@ -17,12 +18,15 @@ namespace ProductStore.Controllers
         }
 
         // GET: Products
+       
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            var products = await _context.Products.ToListAsync();
+            return View(products); 
         }
 
         // GET: Products/Details/5
+      
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,6 +45,7 @@ namespace ProductStore.Controllers
         }
 
         // GET: Products/Create
+       
         public IActionResult Create()
         {
             return View();
@@ -51,6 +56,7 @@ namespace ProductStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken] //Захист від CSRF‑атак (Cross-Site Request Forgery).
+     
         public async Task<IActionResult> Create([Bind("Id,Name,Price,Category,Stock")] Product product)
         {
             if (ModelState.IsValid)
@@ -63,6 +69,8 @@ namespace ProductStore.Controllers
         }
 
         // GET: Products/Edit/5
+
+    
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,6 +91,7 @@ namespace ProductStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Category,Stock")] Product product)
         {
             if (id != product.Id)
@@ -114,6 +123,7 @@ namespace ProductStore.Controllers
         }
 
         // GET: Products/Delete/5
+    
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,6 +144,7 @@ namespace ProductStore.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _context.Products.FindAsync(id);

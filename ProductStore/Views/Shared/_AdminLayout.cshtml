@@ -59,7 +59,9 @@
 
             <hr class="bg-light" />
 
-            <a asp-controller="Account" asp-action="Logout">Logout</a>
+            <form asp-area="Identity" asp-page="/Account/Logout" method="post" id="logoutForm">
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="text-white">Logout</a>
+            </form>
         </div>
 
         <div class="admin-content">

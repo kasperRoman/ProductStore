@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ProductStore.Models.Product>
+
+@{
+    ViewData["Title"] = "Каталог товарів";
+}
+
+<h2>Каталог товарів</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card p-3 shadow-sm">
+                <h5>@item.Name</h5>
+                <p><strong>Ціна:</strong> @item.Price грн</p>
+
+                <a asp-controller="Store"
+                   asp-action="Details"
+                   asp-route-id="@item.Id"
+                   class="btn btn-primary btn-sm">
+                    Детальніше
+                </a>
+            </div>
+        </div>
+    }
+</div>
