@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ProductStore.Models;
+using ProductStore.Models.Product;
 
 namespace ProductStore.Data
 {
@@ -13,5 +13,7 @@ namespace ProductStore.Data
         }
 
         public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<ProductStore.Models.Order.Order> Orders { get; set; }
+        public DbSet<ProductStore.Models.Order.OrderItem> OrderItems { get; set; }
     }
 }

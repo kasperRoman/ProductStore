@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductStore.Data;
-using ProductStore.Models;
+using ProductStore.Models.Product;
 
 namespace ProductStore.Areas.Admin.Controllers
 {

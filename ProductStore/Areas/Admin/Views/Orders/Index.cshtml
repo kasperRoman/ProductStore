@@ -1,0 +1,37 @@
+﻿@model List<ProductStore.Models.Order.Order>
+
+@{
+    ViewData["Title"] = "Замовлення";
+}
+
+<h2>Список замовлень</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Ім’я</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Сума</th>
+            <th>Дата</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.CustomerName</td>
+                <td>@order.CustomerEmail</td>
+                <td>@order.CustomerPhone</td>
+                <td>@order.TotalAmount грн</td>
+                <td>@order.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-info">Деталі</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

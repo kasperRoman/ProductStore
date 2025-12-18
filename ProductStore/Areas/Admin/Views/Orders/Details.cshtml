@@ -1,0 +1,38 @@
+﻿@model ProductStore.Models.Order.Order
+
+@{
+    ViewData["Title"] = "Деталі замовлення";
+}
+
+<h2>Замовлення №@Model.Id</h2>
+
+<p><strong>Ім’я:</strong> @Model.CustomerName</p>
+<p><strong>Email:</strong> @Model.CustomerEmail</p>
+<p><strong>Телефон:</strong> @Model.CustomerPhone</p>
+<p><strong>Адреса:</strong> @Model.CustomerAddress</p>
+<p><strong>Дата:</strong> @Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</p>
+<p><strong>Сума:</strong> @Model.TotalAmount грн</p>
+
+<h4>Товари:</h4>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Назва</th>
+            <th>Ціна</th>
+            <th>Кількість</th>
+            <th>Сума</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Price грн</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Price* item.Quantity) грн</td>
+            </tr>
+        }
+    </tbody>
+</table>
