@@ -123,7 +123,7 @@ namespace ProductStore.Areas.Identity.Pages.Account
 
                     if (await _userManager.IsInRoleAsync(user, "Admin"))
                     {
-                        return LocalRedirect("/admin/products");
+                        return LocalRedirect("/admin");
                     }
 
                     return LocalRedirect(returnUrl);

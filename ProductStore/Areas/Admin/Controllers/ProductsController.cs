@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductStore.Data;
+using ProductStore.Models;
 using ProductStore.Models.Product;
 
 namespace ProductStore.Areas.Admin.Controllers
@@ -157,6 +158,33 @@ namespace ProductStore.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ImportFakeProducts()
+        {
+            using var http = new HttpClient();
+            var json = await http.GetStringAsync("https://fakestoreapi.com/products");
+
+            var fakeProducts = System.Text.Json.JsonSerializer.Deserialize<List<FakeProduct>>(json);
+
+            foreach (var p in fakeProducts)
+            {
+                var product = new ProductStore.Models.Product.Product
+                {
+                    Name = p.title,
+                    Price = (decimal)p.price,
+                    Category = p.category,
+                    Stock = p.rating?.count ?? 0, // беремо count як кількість
+                    ImageUrl = p.image,
+                    Description = p.description
+                };
+
+                _context.Products.Add(product);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.Id == id);

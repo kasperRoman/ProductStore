@@ -19,5 +19,11 @@ namespace ProductStore.Models.Product
 
         [Range(0, 100000, ErrorMessage = "Кількість повинна бути від 0 до 100 000")]
         public int Stock { get; set; }
+
+        [StringLength(300)]
+        public string ImageUrl { get; set; } = string.Empty;
+
+        [StringLength(1000, ErrorMessage = "Опис не може бути довшим за 1000 символів")]
+        public string Description { get; set; } = string.Empty;
     }
 }
